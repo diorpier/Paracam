@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para Cami 🤍</title>
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Fondo tranquilo */
+body {
+    background: radial-gradient(circle at top, #1b2735, #090a0f);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+/* Estrellas */
+.estrella {
+    position: absolute;
+    width: 2px;
+    height: 120px;
+    background: linear-gradient(transparent, rgba(255,255,255,0.8));
+    animation: caer linear infinite;
+}
+
+@keyframes caer {
+    from { transform: translateY(-150px); opacity: 1; }
+    to { transform: translateY(110vh); opacity: 0; }
+}
+
+/* Contenedor */
+.contenedor {
+    position: relative;
+    z-index: 5;
+}
+
+/* Sobre */
+.sobre {
+    width: 340px;
+    height: 220px;
+    background: #f5f5f5;
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+/* Tapa */
+.tapa {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #e0e0e0;
+    clip-path: polygon(0 0, 100% 0, 50% 65%);
+    transform-origin: top;
+    transition: transform 1s ease;
+    z-index: 3;
+}
+
+/* Hoja */
+.hoja {
+    position: absolute;
+    bottom: -300px;
+    left: 10px;
+    width: 320px;
+    height: 420px;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    transition: transform 1.3s ease, opacity 1s;
+    transform: translateY(0);
+    opacity: 0;
+    overflow-y: auto;
+    z-index: 2;
+}
+
+/* Abierto */
+.sobre.abierto .tapa {
+    transform: rotateX(180deg);
+}
+
+.sobre.abierto .hoja {
+    transform: translateY(-520px);
+    opacity: 1;
+}
+
+/* Texto */
+.hoja p {
+    color: #333;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 14px;
+}
+
+.corazon {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 10px;
+    animation: latir 1.5s infinite;
+}
+
+@keyframes latir {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Música (funciona al tocar el sobre) -->
+<audio id="musica" preload="auto" loop>
+    <source src="https://cdn.pixabay.com/audio/2022/11/09/audio_88d0c1d7d2.mp3" type="audio/mpeg">
+</audio>
+
+<div class="contenedor">
+    <div class="sobre" onclick="abrir()">
+        <div class="tapa"></div>
+
+        <div class="hoja">
+            <div class="corazon">🤍</div>
+
+            <p>holaaa cami, perdón si dije que ya no te fastidiaría, solo queria dejarte esta carta, porque sé que no ha sido un buen día para ti.</p>
+
+            <p>no sé que tanto pueda ayudarte este detalle, pero espero que pueda hacerte sentir mejor saber que alguien esta para ti e intentar mejorar tus días dificiles.</p>
+
+            <p>sabes que te quiero mucho, no me gusta que te sientas mal, todo pasa, eres una gran chica, no me equivoqué cuando decidí arriesgarme por ti.</p>
+
+            <p>recuerda que te quiero mucho y que tienes personas las cuales le importas mucho, descansa si?</p>
+
+            <p>mañana será un nuevo y mejor día, te quiero como la vaca muuuuchoooo 🐮🤍</p>
+        </div>
+    </div>
+</div>
+
+<script>
+function abrir() {
+    document.querySelector('.sobre').classList.add('abierto');
+    const musica = document.getElementById('musica');
+    musica.currentTime = 0;
+    musica.play();
+}
+
+/* Lluvia de estrellas */
+function crearEstrella() {
+    const e = document.createElement("div");
+    e.className = "estrella";
+    e.style.left = Math.random() * window.innerWidth + "px";
+    e.style.animationDuration = (Math.random() * 2 + 3) + "s";
+    document.body.appendChild(e);
+    setTimeout(() => e.remove(), 5000);
+}
+setInterval(crearEstrella, 100);
+</script>
+
+</body>
+</html>
